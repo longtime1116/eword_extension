@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "eword_extention",
+  "name": "eword_extension",
   "version": "1.0",
   "description": "Displays a list of registered English words with their meanings and URLs.",
   "action": {
