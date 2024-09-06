@@ -1,5 +1,4 @@
 "use strict";
-// ブックマークレットの関数を定義
 function addWordToStorage() {
     const url = window.location.href;
     let word = "";
@@ -13,16 +12,18 @@ function addWordToStorage() {
         alert("このサイトでは英単語を取得できません。");
         return;
     }
-    const newEntry = { word, meaning, url };
-    const existingData = JSON.parse(localStorage.getItem("wordList") || "[]");
-    if (!existingData.some((item) => item.word === word)) {
-        existingData.push(newEntry);
-        localStorage.setItem("wordList", JSON.stringify(existingData));
-        alert("英単語を登録しました");
-    }
-    else {
-        alert("この英単語は既に登録されています。");
-    }
+    chrome.storage.sync.get("wordList", function (data) {
+        const wordList = data.wordList || [];
+        if (!wordList.some((item) => item.word === word)) {
+            wordList.push({ word, meaning, url });
+            chrome.storage.sync.set({ wordList }, function () {
+                alert("英単語を登録しました");
+            });
+        }
+        else {
+            alert("この英単語は既に登録されています。");
+        }
+    });
 }
 // ブックマークレットのコードを出力
 console.log(`javascript:(${addWordToStorage.toString()})()`);

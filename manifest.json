@@ -1,10 +1,22 @@
 {
-  "manifest_version": 2,
-  "name": "eword extention",
+  "manifest_version": 3,
+  "name": "eword_extention",
   "version": "1.0",
-  "description": "登録した英単語を表示する新しいタブページ",
+  "description": "Displays a list of registered English words with their meanings and URLs.",
+  "background": {
+    "service_worker": "dist/background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": ["storage", "activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["dist/content.js"]
+    }
+  ],
   "chrome_url_overrides": {
     "newtab": "newtab.html"
-  },
-  "permissions": ["storage"]
+  }
 }
