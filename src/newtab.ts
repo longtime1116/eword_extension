@@ -13,7 +13,16 @@ document.addEventListener("DOMContentLoaded", () => {
           index: number
         ) => {
           const item = document.createElement("li");
-          item.textContent = `${entry.word}: ${entry.meaning} (URL: ${entry.url})`;
+          // 単語と意味を設定
+          item.textContent = `${entry.word}: ${entry.meaning} `;
+
+          // URLをハイパーリンクとして設定
+          const link = document.createElement("a");
+          link.href = entry.url;
+          link.textContent = entry.url;
+          link.target = "_blank"; // 新しいタブで開く
+
+          item.appendChild(link);
 
           // 削除ボタンを作成
           const deleteButton = document.createElement("button");
