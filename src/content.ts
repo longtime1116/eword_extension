@@ -12,7 +12,7 @@ if (word) {
     // 同様の word が存在するかチェック
     const wordExists = words.some((entry: any) => entry.word === word);
 
-    if (!wordExists || !meaning) {
+    if (!wordExists && meaning) {
       // 同じ word が存在しない場合のみ追加
       words.push({ word, meaning, url: cleanUrl });
       chrome.storage.local.set({ words });
